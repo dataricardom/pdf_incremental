@@ -1,13 +1,19 @@
 from PyPDF2 import PdfMerger
+from datetime import datetime
 
-merger = PdfMerger()
+def pdf_incremental(caminho_pdfs):
+    timestamp = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
 
-pdfs = ['Pagina1.pdf', 'Pagina2.pdf', 'Pagina3.pdf', 'Pagina4.pdf', 'Pagina5.pdf', 'Pagina6.pdf']
-
-for pdf in pdfs:
-    merger.append(pdf)
+    merger = PdfMerger()
 
 
-merger.write('documentos_cirurgia.pdf')
+    for pdf in caminho_pdfs:
+        merger.append(pdf)
 
-merger.close()
+    nome_salvo = f'documentos_cirurgia_{timestamp}.pdf'
+    merger.write(nome_salvo)
+
+    merger.close()
+
+
+
